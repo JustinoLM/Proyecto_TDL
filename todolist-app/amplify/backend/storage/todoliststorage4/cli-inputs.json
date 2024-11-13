@@ -1,0 +1,13 @@
+{
+  "resourceName": "todoliststorage4",
+  "policyUUID": "76091ab5",
+  "bucketName": "todoliststorage4",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

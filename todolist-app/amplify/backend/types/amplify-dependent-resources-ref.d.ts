@@ -16,5 +16,11 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolId": "string",
       "UserPoolName": "string"
     }
+  },
+  "storage": {
+    "todoliststorage4": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,37 +7,34 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
-import awsExport from '../../aws-exports.js'
-Amplify.configure(awsExport);
+import { createTodo, deleteTodo } from '../../graphql/mutations';
+import { listTodos } from '../../graphql/queries';
+import awsconfig from '../../aws-exports';
 
+Amplify.configure(awsconfig);
 const client = generateClient();
 
-// Datos de ejemplo de tareas
-const initialTasks = [
-    {
-        title: 'Reunión con cliente',
-        user: 'Juan Pérez',
-        dueDate: '2024-11-15',
-    },
-    {
-        title: 'Revisión de código',
-        user: 'Ana Gómez',
-        dueDate: '2024-11-16',
-    },
-    {
-        title: 'Presentación final',
-        user: 'Luis Martínez',
-        dueDate: '2024-11-20',
-    },
-];
-
 function Tareas() {
-    const [tasks, setTasks] = useState(initialTasks);
+    const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState({
         title: '',
         user: '',
         dueDate: '',
     });
+
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                const result = await client.graphql({
+                    query: listTodos,
+                });
+                setTasks(result.data.listTodos.items);
+            } catch (error) {
+                console.error('Error fetching tasks', error);
+            }
+        };
+        fetchTasks();
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -47,23 +44,44 @@ function Tareas() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (newTask.title && newTask.user && newTask.dueDate) {
-            setTasks((prevTasks) => [
-                ...prevTasks,
-                {
-                    title: newTask.title,
-                    user: newTask.user,
-                    dueDate: newTask.dueDate,
-                },
-            ]);
-            setNewTask({ title: '', user: '', dueDate: '' }); // Limpiar formulario después de enviar
+            try {
+                const result = await client.graphql({
+                    query: createTodo,
+                    variables: {
+                        input: {
+                            title: newTask.title,
+                            user: newTask.user,
+                            dueDate: newTask.dueDate,
+                        },
+                    },
+                });
+                setTasks((prevTasks) => [
+                    ...prevTasks,
+                    result.data.createTodo,
+                ]);
+                setNewTask({ title: '', user: '', dueDate: '' });
+            } catch (error) {
+                console.error('Error creating task', error);
+            }
         }
     };
 
-    const handleDeleteTask = (taskIndex) => {
-        setTasks((prevTasks) => prevTasks.filter((_, index) => index !== taskIndex));
+    const handleDeleteTask = async (taskIndex) => {
+        const task = tasks[taskIndex];
+        try {
+            await client.graphql({
+                query: deleteTodo,
+                variables: {
+                    input: { id: task.id },
+                },
+            });
+            setTasks((prevTasks) => prevTasks.filter((_, index) => index !== taskIndex));
+        } catch (error) {
+            console.error('Error deleting task', error);
+        }
     };
 
     return (
