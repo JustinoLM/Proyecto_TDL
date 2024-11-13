@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom';
 
 function Homepage(){
     return (
@@ -24,8 +25,9 @@ function Homepage(){
                         Mantenga a su equipo sincronizado con notificaciones en tiempo real y una visualización clara del progreso. 
                         ¡Nunca más perderá de vista una tarea importante! Colabore, priorice y gestione proyectos con facilidad desde cualquier lugar.
     <br /><br />                    </p>
+                    <Link to={('/tareas')}>
                     <Button variant="outline-primary">Ver tareas &gt;&gt;</Button>
-
+                    </Link>
                 </Col>
              </Row>
         </Container>
