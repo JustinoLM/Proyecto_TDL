@@ -31,12 +31,12 @@ function RegisterPage(){
 
                         <Form.Group className="mb-3" controlId="formPassword">
                             <Form.Label>Contraseña</Form.Label>
-                            <Form.Control type="password"  minLength="8" placeholder="Enter Password" />
+                            <Form.Control type="password"  minLength="8" placeholder="Ingrese contraseña" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formConfirm">
                             <Form.Label>Confirmar contraseña</Form.Label>
-                            <Form.Control type="password"  minLength="8" placeholder="Confirm Password" />
+                            <Form.Control type="password"  minLength="8" placeholder="Confirme contraseña" />
                         </Form.Group>
                         
                         <Button variant="primary" type="submit">Registrarse &gt;&gt;</Button>&nbsp;

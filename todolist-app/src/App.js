@@ -6,7 +6,7 @@ import SiteNav from './components/Common/SiteNav';
 import Homepage from './components/home/HomePage';
 import LoginPage from './components/auth/LoginPage';
 import RegisterPage from './components/auth/RegisterPage';
-
+import Tareas from './components/tareas/Tareas';
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
         <Route path='/' exact={true} element={<Homepage/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/register' element={<RegisterPage/>}/>
+        <Route path='/tareas' element={<Tareas/>}/>
       </Routes>
       <SiteFooter/>
     </div>

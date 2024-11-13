@@ -15,15 +15,15 @@ function LoginPage(){
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Correo</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Ingrese email" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Contraseña</Form.Label>
-                            <Form.Control type="password" minLength="8" placeholder="Enter Password" />
+                            <Form.Control type="password" minLength="8" placeholder="Ingrese contraseña" />
                         </Form.Group>
                         
-                        <Button variant="primary" type="submit">Login &gt;&gt;</Button>&nbsp;                        
+                        <Button variant="primary" type="submit">Iniciar Sesion &gt;&gt;</Button>&nbsp;                        
                     </Form>
                 </Col>
             </Row>

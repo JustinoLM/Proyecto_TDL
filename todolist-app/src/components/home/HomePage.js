@@ -19,8 +19,11 @@ function Homepage(){
                     <p className="mt-4">
                         To-Do List App
                         <br /><br />
-                        Su pagina colaborativa favorita para realizar trabajos en grupo en linea.
-                    </p>
+                        Su página colaborativa favorita para realizar trabajos en grupo en línea.
+                        Organice sus tareas de manera sencilla, asignando responsabilidades y estableciendo fechas límite.<br></br>
+                        Mantenga a su equipo sincronizado con notificaciones en tiempo real y una visualización clara del progreso. 
+                        ¡Nunca más perderá de vista una tarea importante! Colabore, priorice y gestione proyectos con facilidad desde cualquier lugar.
+    <br /><br />                    </p>
                     <Button variant="outline-primary">Ver tareas &gt;&gt;</Button>
 
                 </Col>
